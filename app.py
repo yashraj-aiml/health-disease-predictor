@@ -3,11 +3,11 @@ import pickle
 import numpy as np
 
 # Load models
-model_d = pickle.load(open("models/diabetes.pkl", "rb"))
-scaler_d = pickle.load(open("models/diabetes_scaler.pkl", "rb"))
+model_d = pickle.load(open("diabetes.pkl", "rb"))
+scaler_d = pickle.load(open("diabetes_scaler.pkl", "rb"))
 
-model_h = pickle.load(open("models/heart.pkl", "rb"))
-scaler_h = pickle.load(open("models/heart_scaler.pkl", "rb"))
+model_h = pickle.load(open("heart.pkl", "rb"))
+scaler_h = pickle.load(open("heart_scaler.pkl", "rb"))
 
 st.set_page_config(page_title="Disease Predictor", layout="centered")
 
