@@ -59,3 +59,5 @@ elif disease == "Heart Disease":
             st.error(f"Heart Disease Detected ❗ (Confidence: {prob[0][1]*100:.2f}%)")
         else:
             st.success(f"No Heart Disease ✅ (Confidence: {prob[0][0]*100:.2f}%)")
+ st.markdown("---")
+ st.write("Developed by Yashraj")           
