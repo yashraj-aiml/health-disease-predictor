@@ -16,6 +16,9 @@ st.title("🩺 Multi Disease Prediction App")
 # Sidebar
 disease = st.sidebar.selectbox("Select Disease", ["Diabetes", "Heart Disease"])
 
+st.markdown("---")
+st.write("Developed by Yashraj")
+
 # ---------------- DIABETES ----------------
 if disease == "Diabetes":
     st.header("Diabetes Prediction")
@@ -58,6 +61,4 @@ elif disease == "Heart Disease":
         if prediction[0] == 1:
             st.error(f"Heart Disease Detected ❗ (Confidence: {prob[0][1]*100:.2f}%)")
         else:
-            st.success(f"No Heart Disease ✅ (Confidence: {prob[0][0]*100:.2f}%)")
- st.markdown("---")
- st.write("Developed by Yashraj")           
+            st.success(f"No Heart Disease ✅ (Confidence: {prob[0][0]*100:.2f}%)")           
