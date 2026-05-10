@@ -3,16 +3,6 @@ import pickle
 import numpy as np
 from streamlit_option_menu import option_menu
 import plotly.graph_objects as go
-prob=model_d.predict_proba(data_scaled)
-risk=prob[0][1]*100
-figs=go.Figure(go.Indicator(
-    mode="gauge+number",
-    value=risk,
-    title={'text':"Diabetes Risk"},
-    gauge={'axix':{'range':[0,100]}}
-))
-st.plotly.chart(fig)
-    
     
 st.set_page_config(
     page_title="Muti Disease Prediction",
@@ -57,13 +47,31 @@ if disease == "Diabetes":
         hdl = st.number_input("HDL")
         weight = st.number_input("Weight")
 
-    if st.button("Predict Diabetes"):
 
-        data = np.array([[glu, hdl, ratio, age, weight]])
-        data_scaled = scaler_d.transform(data)
+if st.button("Predict Diabetes"):
 
-        prediction = model_d.predict(data_scaled)
-        prob = model_d.predict_proba(data_scaled)
+    data = np.array([[glu, hdl, ratio, age, weight]])
+    data_scaled = scaler_d.transform(data)
+
+    prediction = model_d.predict(data_scaled)
+    prob = model_d.predict_proba(data_scaled)
+
+    risk = prob[0][1] * 100
+
+    fig = go.Figure(go.Indicator(
+        mode="gauge+number",
+        value=risk,
+        title={'text': "Diabetes Risk"},
+        gauge={'axis': {'range': [0, 100]}}
+    ))
+
+    st.plotly_chart(fig)
+
+    if prediction[0] == 1:
+        st.error(f"Diabetes Detected ❗ (Confidence: {risk:.2f}%)")
+    else:
+        st.success(f"No Diabetes ✅ (Confidence: {prob[0][0]*100:.2f}%)")
+
 
         if prediction[0] == 1:
             st.error(f"Diabetes Detected ❗ (Confidence: {prob[0][1]*100:.2f}%)")
