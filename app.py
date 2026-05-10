@@ -39,13 +39,13 @@ if disease == "Diabetes":
     col1, col2 = st.columns(2)
 
     with col1:
-        glu = st.number_input("Glucose")
-        ratio = st.number_input("Ratio")
-        age = st.number_input("Age")
+        glu = st.number_input("Glucose Level (stab.glu)", min_value=0.0, value=100.0)
+        ratio = st.number_input("Cholesterol Ratio", min_value=0.0, value=4.0)
+        age = st.number_input("Age", min_value=1, value=40,step=1)
 
     with col2:
-        hdl = st.number_input("HDL")
-        weight = st.number_input("Weight")
+        hdl = st.number_input("HDL Cholesterol", min_value=0.0, value=50.0)
+        weight = st.number_input("Weight (kg)", min_value=1.0, value=70.0)
 
 
 if st.button("Predict Diabetes"):
@@ -88,12 +88,12 @@ elif disease == "Heart Disease":
     col1, col2 = st.columns(2)
 
     with col1:
-        age = st.number_input("Age")
-        cp = st.number_input("Chest Pain")
+        age = st.number_input("Age", min_value=1, value=40)
+        cp = st.selectbox("Chest Pain Type", [0,1,2,3])
 
     with col2:
-        sex = st.number_input("Sex")
-        thalach = st.number_input("Heart Rate")
+        sex = st.selectbox("Sex", [0, 1], format_func=lambda x: "Female" if x == 0 else "Male")
+        thalach = st.number_input("Max Heart Rate", min_value=50, value=150)
 
     if st.button("Predict Heart Disease"):
 
