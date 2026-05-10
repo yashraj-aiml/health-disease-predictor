@@ -66,6 +66,8 @@ if st.button("Predict Diabetes"):
     ))
 
     st.plotly_chart(fig)
+    st.progress(int(risk))
+    st.write(f"Prediction Confidence: {risk:.2f}%")
 
     if prediction[0] == 1:
         st.error(f"Diabetes Detected ❗ (Confidence: {risk:.2f}%)")
