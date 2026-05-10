@@ -2,6 +2,18 @@ import streamlit as st
 import pickle
 import numpy as np
 from streamlit_option_menu import option_menu
+import plotly.graph_object as go
+prob=model_d.predict_proba(data_scaled)
+risk=prob[0][1]*100
+figs=go.Figure(go.Indicator(
+    mode="gauge+number"
+    value=risk,
+    title={'text':"Diabetes Risk"},
+    gauge={'axix':{'range":[0,100]}}
+))
+st.plotly.chart(fig)
+    
+    
 st.set_page_config(
     page_title="Muti Disease Prediction",
     page_icon="🏥",
@@ -91,5 +103,4 @@ elif disease == "Heart Disease":
 
 st.markdown("---")
 st.write("Developed by Yashraj")
-st.markdown("---")
-st.write("Developed by Yashraj")
+
