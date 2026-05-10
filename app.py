@@ -70,9 +70,9 @@ if st.button("Predict Diabetes"):
     st.write(f"Prediction Confidence: {risk:.2f}%")
 
     if prediction[0] == 1:
-        st.error(f"Diabetes Detected ❗ (Confidence: {risk:.2f}%)")
+        st.error(f"Diabetes Detected ❗")
     else:
-        st.success(f"No Diabetes ✅ (Confidence: {prob[0][0]*100:.2f}%)")
+        st.success(f"No Diabetes ✅ ")
 
 
         if prediction[0] == 1:
