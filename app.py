@@ -25,7 +25,7 @@ scaler_h = pickle.load(open("heart_scaler.pkl", "rb"))
 
 
 # Sidebar
-disease = st.sidebar.selectbox("Select Disease", ["Diabetes", "Heart Disease"])
+disease = st.sidebar.selectbox("🔍 Select Disease", ["Diabetes", "Heart Disease"])
 
 
 # ---------------- DIABETES ----------------
