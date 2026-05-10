@@ -31,10 +31,12 @@ disease = st.sidebar.selectbox("🔍 Select Disease", ["Diabetes", "Heart Diseas
 # ---------------- DIABETES ----------------
 if disease == "Diabetes":
     st.header("Diabetes Prediction")
-
+col1, col2=st.columns(2)
+with col1:
     glu = st.number_input("Glucose Level (stab.glu)", min_value=0.0, value=100.0)
     hdl = st.number_input("HDL Cholesterol", min_value=0.0, value=50.0)
     ratio = st.number_input("Cholesterol Ratio", min_value=0.0, value=4.0)
+with col2:
     age = st.number_input("Age", min_value=1, value=30)
     weight = st.number_input("Weight (kg)", min_value=1.0, value=70.0)
 
@@ -55,11 +57,13 @@ if disease == "Diabetes":
 elif disease == "Heart Disease":
     st.header("Heart Disease Prediction")
 
+col1, col2 =st.columns(2)
+with col1:
     age = st.number_input("Age", min_value=1, value=40)
     sex = st.selectbox("Sex", [0, 1], format_func=lambda x: "Female" if x == 0 else "Male")
+with col2:    
     cp = st.selectbox("Chest Pain Type", [0,1,2,3])
     thalach = st.number_input("Max Heart Rate", min_value=50, value=150)
-
     if st.button("Predict Heart Disease"):
         data = np.array([[age, sex, cp, thalach]])
         data_scaled = scaler_h.transform(data)
