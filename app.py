@@ -2,7 +2,7 @@ import streamlit as st
 import pickle
 import numpy as np
 from streamlit_option_menu import option_menu
-import plotly.graph_object as go
+import plotly.graph_objects as go
 prob=model_d.predict_proba(data_scaled)
 risk=prob[0][1]*100
 figs=go.Figure(go.Indicator(
