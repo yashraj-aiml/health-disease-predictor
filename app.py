@@ -1,6 +1,12 @@
 import streamlit as st
 import pickle
 import numpy as np
+from streamlit_option_menu import option_menu
+selected=option_menu(
+    menu_title=None,
+    options=["Home","Diabetes","Heart Disease","History"],
+    icons=["house","activity","heart","clock-history"],
+    orientation="horizontal"
 
 # Load models
 model_d = pickle.load(open("diabetes.pkl", "rb"))
