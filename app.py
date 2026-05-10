@@ -9,7 +9,7 @@ figs=go.Figure(go.Indicator(
     mode="gauge+number"
     value=risk,
     title={'text':"Diabetes Risk"},
-    gauge={'axix':{'range":[0,100]}}
+    gauge={'axix':{'range':[0,100]}}
 ))
 st.plotly.chart(fig)
     
