@@ -6,7 +6,7 @@ import plotly.graph_object as go
 prob=model_d.predict_proba(data_scaled)
 risk=prob[0][1]*100
 figs=go.Figure(go.Indicator(
-    mode="gauge+number"
+    mode="gauge+number",
     value=risk,
     title={'text':"Diabetes Risk"},
     gauge={'axix':{'range':[0,100]}}
