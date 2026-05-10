@@ -29,6 +29,7 @@ disease = st.sidebar.selectbox("🔍 Select Disease", ["Diabetes", "Heart Diseas
 
 
 # ---------------- DIABETES ----------------
+
 if disease == "Diabetes":
 
     st.subheader("Diabetes Prediction")
@@ -36,12 +37,16 @@ if disease == "Diabetes":
     col1, col2 = st.columns(2)
 
     with col1:
-        glucose = st.number_input("Glucose")
+        glu = st.number_input("Glucose")
+        ratio = st.number_input("Ratio")
+        age = st.number_input("Age")
 
     with col2:
-        age = st.number_input("Age")
-        
+        hdl = st.number_input("HDL")
+        weight = st.number_input("Weight")
+
     if st.button("Predict Diabetes"):
+
         data = np.array([[glu, hdl, ratio, age, weight]])
         data_scaled = scaler_d.transform(data)
 
@@ -55,6 +60,7 @@ if disease == "Diabetes":
 
 
 # ---------------- HEART ----------------
+
 elif disease == "Heart Disease":
 
     st.subheader("Heart Disease Prediction")
@@ -62,12 +68,15 @@ elif disease == "Heart Disease":
     col1, col2 = st.columns(2)
 
     with col1:
-        heart_age = st.number_input("Age")
+        age = st.number_input("Age")
+        cp = st.number_input("Chest Pain")
 
     with col2:
         sex = st.number_input("Sex")
-        
-        if st.button("Predict Heart Disease"):
+        thalach = st.number_input("Heart Rate")
+
+    if st.button("Predict Heart Disease"):
+
         data = np.array([[age, sex, cp, thalach]])
         data_scaled = scaler_h.transform(data)
 
@@ -77,7 +86,10 @@ elif disease == "Heart Disease":
         if prediction[0] == 1:
             st.error(f"Heart Disease Detected ❗ (Confidence: {prob[0][1]*100:.2f}%)")
         else:
-            st.success(f"No Heart Disease ✅ (Confidence: {prob[0][0]*100:.2f}%)")   
+            st.success(f"No Heart Disease ✅ (Confidence: {prob[0][0]*100:.2f}%)")
 
+
+st.markdown("---")
+st.write("Developed by Yashraj")
 st.markdown("---")
 st.write("Developed by Yashraj")
