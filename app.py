@@ -2,6 +2,11 @@ import streamlit as st
 import pickle
 import numpy as np
 from streamlit_option_menu import option_menu
+st.set_page_config(
+    page_title="Muti Disease Prediction",
+    page_icon="🏥",
+    layout="wide"
+)
 selected=option_menu(
     menu_title=None,
     options=["Home","Diabetes","Heart Disease","History"],
