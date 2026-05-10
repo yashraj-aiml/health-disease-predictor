@@ -7,6 +7,9 @@ st.set_page_config(
     page_icon="🏥",
     layout="wide"
 )
+st.title("🩺 Advanced Multi Disease Prediction System")
+
+st.write("AI-powered healthcare prediction system using Machine Learning")
 selected=option_menu(
     menu_title=None,
     options=["Home","Diabetes","Heart Disease","History"],
@@ -20,9 +23,6 @@ scaler_d = pickle.load(open("diabetes_scaler.pkl", "rb"))
 model_h = pickle.load(open("heart.pkl", "rb"))
 scaler_h = pickle.load(open("heart_scaler.pkl", "rb"))
 
-st.set_page_config(page_title="Disease Predictor", layout="centered")
-
-st.title("🩺 Multi Disease Prediction App")
 
 # Sidebar
 disease = st.sidebar.selectbox("Select Disease", ["Diabetes", "Heart Disease"])
