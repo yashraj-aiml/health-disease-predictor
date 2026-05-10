@@ -7,7 +7,7 @@ selected=option_menu(
     options=["Home","Diabetes","Heart Disease","History"],
     icons=["house","activity","heart","clock-history"],
     orientation="horizontal"
-
+)
 # Load models
 model_d = pickle.load(open("diabetes.pkl", "rb"))
 scaler_d = pickle.load(open("diabetes_scaler.pkl", "rb"))
