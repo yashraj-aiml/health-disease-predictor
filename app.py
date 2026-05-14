@@ -18,6 +18,7 @@ selected=option_menu(
     icons=["house","activity","heart","clock-history"],
     orientation="horizontal"
 )
+history=[]
 # Load models
 model_d = pickle.load(open("diabetes.pkl", "rb"))
 scaler_d = pickle.load(open("diabetes_scaler.pkl", "rb"))
@@ -26,13 +27,24 @@ model_h = pickle.load(open("heart.pkl", "rb"))
 scaler_h = pickle.load(open("heart_scaler.pkl", "rb"))
 
 
-# Sidebar
-disease = st.sidebar.selectbox("🔍 Select Disease", ["Diabetes", "Heart Disease"])
+if selected== "Home":
+    st.header("Welcome to Advanced Multi Disease Prediction System")
+    st.write("""
+    This AI-powered healthcare application predicts diseases using Machine Learning.
+
+    Features:
+    -Diabetes Prediction 
+    -Heart Diseases Prediction
+    -Risk Visualization
+    -Live Web Deployement
+    """)
+    st.success("System Running Sucessfully")
+    
 
 
 # ---------------- DIABETES ----------------
 
-if disease == "Diabetes":
+elif selected == "Diabetes":
 
     st.subheader("Diabetes Prediction")
 
@@ -57,6 +69,10 @@ if st.button("Predict Diabetes"):
     prob = model_d.predict_proba(data_scaled)
 
     risk = prob[0][1] * 100
+    history.append({
+        "Diabetes":"Diabetes",
+        "Risk":f"{risk:.2f}%"
+    })
 
     fig = go.Figure(go.Indicator(
         mode="gauge+number",
@@ -72,18 +88,13 @@ if st.button("Predict Diabetes"):
     if prediction[0] == 1:
         st.error(f"Diabetes Detected ❗ (Confidence: {prob[0][1]*100:.2f}%)")
     else:
-        st.success(f"No Diabetes ✅ ")
+        st.success(f"No Diabetes ✅ (Confidence: {prob[0][0]*100:.2f}%) ")
 
-
-        if prediction[0] == 1:
-            st.error(f"Diabetes Detected ❗ (Confidence: {prob[0][1]*100:.2f}%)")
-        else:
-            st.success(f"No Diabetes ✅ (Confidence: {prob[0][0]*100:.2f}%) ")
 
 
 # ---------------- HEART ----------------
 
-elif disease == "Heart Disease":
+elif selected == "Heart Disease":
 
     st.subheader("Heart Disease Prediction")
 
@@ -104,12 +115,34 @@ elif disease == "Heart Disease":
 
         prediction = model_h.predict(data_scaled)
         prob = model_h.predict_proba(data_scaled)
+        risk=prob[0][1]*100
+        history.append({
+            "Heart Diseases":"Heart Disease"
+            "Risk":f"{risk:.2f}%"
+        })
+        fig = go.Figure(go.Indicator(
+        mode="gauge+number",
+        value=risk,
+        title={'text': "Heart Disease Risk"},
+        gauge={'axis': {'range': [0, 100]}}
+    ))
+
+    st.plotly_chart(fig)
+    st.progress(int(risk))
+    st.write(f"Prediction Confidence: {risk:.2f}%")
+
 
         if prediction[0] == 1:
             st.error(f"Heart Disease Detected ❗ (Confidence: {prob[0][1]*100:.2f}%)")
         else:
             st.success(f"No Heart Disease ✅ (Confidence: {prob[0][0]*100:.2f}%)")
-
+    elif selected=="history":
+        st.header("Prediction History")
+        if len(history)==0:
+            st.warning("No Prediction yet")
+        else:
+            st.write(history)
+     
 
 st.markdown("---")
 st.write("Developed by Yashraj")
