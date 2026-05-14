@@ -117,7 +117,7 @@ elif selected == "Heart Disease":
         prob = model_h.predict_proba(data_scaled)
         risk=prob[0][1]*100
         history.append({
-            "Heart Diseases":"Heart Disease"
+            "Heart Diseases":"Heart Disease",
             "Risk":f"{risk:.2f}%"
         })
         fig = go.Figure(go.Indicator(
