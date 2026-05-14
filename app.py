@@ -60,31 +60,28 @@ elif selected == "Diabetes":
         weight = st.number_input("Weight (kg)", min_value=1.0, value=70.0)
 
 
-if st.button("Predict Diabetes"):
+    if st.button("Predict Diabetes"):
+        data = np.array([[glu, hdl, ratio, age, weight]])
+        data_scaled = scaler_d.transform(data)
 
-    data = np.array([[glu, hdl, ratio, age, weight]])
-    data_scaled = scaler_d.transform(data)
+        prediction = model_d.predict(data_scaled)
+        prob = model_d.predict_proba(data_scaled)
 
-    prediction = model_d.predict(data_scaled)
-    prob = model_d.predict_proba(data_scaled)
+        risk = prob[0][1] * 100
+        history.append({
+            "Diabetes":"Diabetes",
+            "Risk":f"{risk:.2f}%"
+        })
 
-    risk = prob[0][1] * 100
-    history.append({
-        "Diabetes":"Diabetes",
-        "Risk":f"{risk:.2f}%"
-    })
-
-    fig = go.Figure(go.Indicator(
-        mode="gauge+number",
-        value=risk,
-        title={'text': "Diabetes Risk"},
-        gauge={'axis': {'range': [0, 100]}}
-    ))
-
-    st.plotly_chart(fig)
-    st.progress(int(risk))
-    st.write(f"Prediction Confidence: {risk:.2f}%")
-
+        fig = go.Figure(go.Indicator(
+            mode="gauge+number",
+            value=risk,
+            title={'text': "Diabetes Risk"},
+            gauge={'axis': {'range': [0, 100]}}
+        ))
+        st.plotly_chart(fig)
+        st.progress(int(risk))
+        st.write(f"Prediction Confidence: {risk:.2f}%")
     if prediction[0] == 1:
         st.error(f"Diabetes Detected ❗ (Confidence: {prob[0][1]*100:.2f}%)")
     else:
