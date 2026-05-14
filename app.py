@@ -135,8 +135,8 @@ elif selected == "Heart Disease":
 
     if prediction[0] == 1:
         st.error(f"Heart Disease Detected ❗ (Confidence: {prob[0][1]*100:.2f}%)")
-    else:
-        st.success(f"No Heart Disease ✅ (Confidence: {prob[0][0]*100:.2f}%)")
+      else:
+          st.success(f"No Heart Disease ✅ (Confidence: {prob[0][0]*100:.2f}%)")
     elif selected=="history":
         st.header("Prediction History")
         if len(history)==0:
