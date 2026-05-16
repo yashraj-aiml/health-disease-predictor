@@ -18,7 +18,8 @@ selected=option_menu(
     icons=["house","activity","heart","clock-history"],
     orientation="horizontal"
 )
-history=[]
+if "history" not in st.session_state:
+    st.session_state.history=[]
 # Load models
 model_d = pickle.load(open("diabetes.pkl", "rb"))
 scaler_d = pickle.load(open("diabetes_scaler.pkl", "rb"))
@@ -68,7 +69,7 @@ elif selected == "Diabetes":
         prob = model_d.predict_proba(data_scaled)
 
         risk = prob[0][1] * 100
-        history.append({
+        st.session_state.history.append({
             "Diabetes":"Diabetes",
             "Risk":f"{risk:.2f}%"
         })
@@ -113,7 +114,7 @@ elif selected == "Heart Disease":
         prediction = model_h.predict(data_scaled)
         prob = model_h.predict_proba(data_scaled)
         risk=prob[0][1]*100
-        history.append({
+        st.session_state.history.append({
             "Heart Diseases":"Heart Disease",
             "Risk":f"{risk:.2f}%"
         })
@@ -133,10 +134,10 @@ elif selected == "Heart Disease":
             st.success(f"No Heart Disease ✅ (Confidence: {prob[0][0]*100:.2f}%)")
 elif selected=="history":
     st.header("Prediction History")
-    if len(history)==0:
+    if len(st.session_state.history)==0:
         st.warning("No Prediction yet")
     else:
-        st.write(history)
+        st.write(st.session_state.history)
      
 
 st.markdown("---")
