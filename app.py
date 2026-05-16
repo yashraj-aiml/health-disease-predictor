@@ -134,10 +134,10 @@ elif selected == "Heart Disease":
             st.success(f"No Heart Disease ✅ (Confidence: {prob[0][0]*100:.2f}%)")
 elif selected=="history":
     st.header("Prediction History")
-    if len(st.session_state.history)==0:
-        st.warning("No Prediction yet")
+    if st.session_state.history:
+        st.table(st.session_state.history)
     else:
-        st.write(st.session_state.history)
+        st.warning(st.session_state.history)
      
 
 st.markdown("---")
