@@ -132,7 +132,7 @@ elif selected == "Heart Disease":
             st.error(f"Heart Disease Detected ❗ (Confidence: {prob[0][1]*100:.2f}%)")
         else:
             st.success(f"No Heart Disease ✅ (Confidence: {prob[0][0]*100:.2f}%)")
-elif selected=="history":
+elif selected=="History":
     st.header("Prediction History")
     if st.session_state.history:
         st.table(st.session_state.history)
