@@ -122,11 +122,11 @@ elif selected == "Heart Disease":
         value=risk,
         title={'text': "Heart Disease Risk"},
         gauge={'axis': {'range': [0, 100]}}
-    ))
+        ))
 
-    st.plotly_chart(fig)
-    st.progress(int(risk))
-    st.write(f"Prediction Confidence: {risk:.2f}%")
+        st.plotly_chart(fig)
+        st.progress(int(risk))
+        st.write(f"Prediction Confidence: {risk:.2f}%")
     
 
 
