@@ -141,5 +141,5 @@ elif selected=="History":
      
 
 st.markdown("---")
-st.write("Developed by Yashraj")
+st.write("Developed by Yashraj & Navan")
 
